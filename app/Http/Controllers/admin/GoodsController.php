@@ -14,6 +14,11 @@ class GoodsController extends Controller
 //        dd($_FILES);
         $path=$request->file('goods_name')->store('goods');
 //        dd($path);
+        if(empty($path)){
+            echo "file";die;
+        }else{
+            $path=$request->file('goods_name')->store('goods');
+        }
         echo asset('storage').'/'.$path;
     }
 

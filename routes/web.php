@@ -14,12 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// 后台
 Route::get('/admin/index','admin\AdminController@index');
 Route::get('/admin/add','admin\AdminController@add');
 Route::post('/admin/do_add','admin\AdminController@do_add');
 Route::get('/admin/del','admin\AdminController@del');
 Route::get('/admin/update','admin\AdminController@update');
 Route::post('/admin/do_update','admin\AdminController@do_update');
+
+// 前台
+Route::get('/home/index','home\indexController@index');
+Route::get('/home/product','home\indexController@product');
+Route::post('/home/do_product','home\indexController@do_product');
+
+
+// 周考
+Route::get('/comm/index','CommController@index');
+Route::get('/comm/insert','CommController@insert');
+Route::post('/comm/do_insert','CommController@do_insert');
+Route::get('/comm/del','CommController@del');
+
 
 
 
@@ -49,5 +63,15 @@ Route::group(['middleware'=>['login']],function(){
     // 添加学生信息
 Route::get('/student/add','StudentController@add');
 });
+
+// 修改中间件
+Route::group(['middleware'=>['update']],function(){
+    Route::get('/comm/update','CommController@update');
+    Route::post('/comm/do_update','CommController@do_update');
+
+});
+
+
+
 
 

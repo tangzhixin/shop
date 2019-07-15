@@ -12,12 +12,12 @@ class GoodsController extends Controller
     }
     public function  do_add_goods(Request $request){
 //        dd($_FILES);
-        $path=$request->file('goods_name')->store('goods');
+        $path=$request->file('goods_name')->store('home');
 //        dd($path);
         if(empty($path)){
             echo "file";die;
         }else{
-            $path=$request->file('goods_name')->store('goods');
+            $path=$request->file('goods_name')->store('home');
         }
         echo asset('storage').'/'.$path;
     }

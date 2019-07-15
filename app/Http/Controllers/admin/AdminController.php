@@ -9,13 +9,13 @@ use DB;
 class AdminController extends Controller
 {
     public function index(Request $request){
-        // echo 111;
+//         echo 111;die;
         $req=$request->all();
         // var_dump($req);
         $search="";
         if(!empty($req['search'])){
             $search=$req['search'];
-            $info=DB::table('goods')->where('name','like','%'.$req['search'].'%')->paginate(2);
+            $info=DB::table('goods')->where('goods_name','like','%'.$req['search'].'%')->paginate(2);
         }else{
             $info=DB::table('goods')->paginate(2);
         }
@@ -32,7 +32,7 @@ class AdminController extends Controller
         if(empty($path)){
             echo "file";die;
         }else{
-            $path=$request->file('goods_pic')->store('goods');
+            $path=$request->file('goods_pic')->store('home');
         }
         $path=('/storage/'.$path);
 //        dd($obj);
@@ -67,7 +67,7 @@ class AdminController extends Controller
         if(empty($files)){
             echo "false";
         }else{
-            $path=$request->file('goods_pic')->store('goods');
+            $path=$request->file('goods_pic')->store('home');
             $goods_pic=('/storage/'.$path);
             $arr=['goods_pic'=>$goods_pic];
             $res=DB::table('goods')->where($where)->update($arr);

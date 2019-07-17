@@ -46,15 +46,15 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">所有商品</a>
           <dl class="layui-nav-child">
-            <dd><a href="add">添加商品</a></dd>
-            <dd><a href="index">商品列表</a></dd>
+            <dd><a href="{{url('admin/add')}}">添加商品</a></dd>
+            <dd><a href="{{url('admin/index')}}">商品列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">商品库存管理系统</a>
+          <a href="javascript:;">管理员管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="">商品添加</a></dd>
-            <dd><a href="">商品列表</a></dd>
+            <dd><a href="{{url('User/add')}}">添加用户</a></dd>
+            <dd><a href="{{url('User/index')}}">用户列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item"><a href="">云市场</a></li>

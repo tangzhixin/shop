@@ -17,7 +17,7 @@ class Login
     {
         //前置
         // dd($result);
-        if($request->session()->has('username')){
+        if($request->session()->has('userInfo')){
             echo "登陆成功 !";
             // redirect('student/index');
         }

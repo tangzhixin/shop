@@ -8,6 +8,77 @@ use DB;
 
 class AdminController extends Controller
 {
+    // 登录
+    public function login(){
+//        echo 111;die;
+        return view('admin/login');
+    }
+    // 执行登录
+    public function do_login(Request $request){
+        $data=$request->all();
+        $password=md5($data['password']);
+        $where=[
+            ['name','=',$data['name']],
+            ['password','=',$data['password']],
+        ];
+        $arr=DB::table('user')->where($where)->first();
+        $arr=get_object_vars($arr);
+//        dd($arr);
+        $state=$arr['state'];
+        $count=DB::table('user')->count();
+//        dd($count);
+        if($count<=0){
+            echo "登录失败,账户或密码不对";die;
+        }else{
+            session(['name'=>$data['name'],'password'=>$password,'state'=>$state]);
+            return redirect('User/index');
+        }
+    }
+    public function state(Request $request){
+        $data=$request->all();
+//        dd($data);
+        $arr=[$data['field']=>$data['value']];
+        $where=[
+            ['id','=',$data['id']],
+        ];
+        $res=DB::table('user')->where($where)->update($arr);
+        if($res){
+            echo json_encode(['code'=>1,'msg'=>'成功']);
+        }else{
+            echo json_encode(['code'=>2,'msg'=>'失败']);die;
+        }
+    }
+
+    // 注册
+    public function register(){
+        return view('admin/register');
+    }
+    // 执行注册
+    public function do_register(Request $request){
+        $req=$request->all();
+        // dd($req);
+        $data=(
+        ['name'=>$req['name'],'password'=>$req['password'],'reg_time'=>time()]
+        );
+        // dd($data);
+        $where=[
+            ['name','=',$data['name']],
+        ];
+        // dd($where);
+        $obj=DB::table('user')->where($where)->count();
+        // dd($obj);
+        if($obj>0)
+        {
+            echo "字段已经存在";die;
+        }
+        $res=DB::table('user')->insert(
+            ['name'=>$req['name'],'password'=>$req['password'],'reg_time'=>time()]
+        );
+        if($res){
+            return redirect('admin/login');
+        }
+    }
+
     public function index(Request $request){
 //         echo 111;die;
         $req=$request->all();

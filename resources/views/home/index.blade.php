@@ -140,7 +140,8 @@
                 @foreach($goods_info as $v)
                     <div class="col s6">
                         <div class="content">
-                            <img src="{{$v->goods_pic}}" alt="" style="width:300px;height:300px">
+                            <a href="{{url('home/product')}}?id={{$v->id}}"><img src="{{$v->goods_pic}}" alt="" style="width:300px;height:300px"></a>
+
                             <h6><a href="">Fashion Men's</a></h6>
                             <div class="price">
                                 ${{$v->goods_price}} <span>$28</span>

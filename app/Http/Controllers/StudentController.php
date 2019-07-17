@@ -41,11 +41,12 @@ class StudentController extends Controller
 
         $req=$request->all();
         $name=DB::table('register')->where(['name'=>$req['name'],'pwd'=>$req['pwd']])->first();
+//        dd($name);
         if(empty($name)){
             echo "<script>alert('账号或密码错误'),location.href='/student/login'</script>";
         }else{
             $request->session()->put('name',$name);
-            return redirect('/student/index');
+            return redirect('/home/index');
         }
         
     }

@@ -52,9 +52,9 @@
                     <div class="row">
                         <div class="col 12">
                             @if(!empty(Session::get('userName')))
-                                <a class="btn button-default" href="{{url('home/product_do')}}?id={{$data->id}}">SEND TO CART</a>
+                                <a class="btn button-default" href="{{url('home/do_product')}}?id={{$data->id}}">SEND TO CART</a>
                             @else
-                                <a class="btn button-default" href="{{url('student/login')}}">SEND TO CART</a>
+                                <a class="btn button-default" href="{{url('home/do_product')}}?id={{$data->id}}">发送到购物车</a>
                             @endif
                         </div>
                     </div>

@@ -21,11 +21,25 @@ Route::post('/admin/do_add','admin\AdminController@do_add');
 Route::get('/admin/del','admin\AdminController@del');
 Route::get('/admin/update','admin\AdminController@update');
 Route::post('/admin/do_update','admin\AdminController@do_update');
+// 后台登录
+Route::get('/admin/login','admin\AdminController@login');
+Route::post('/admin/do_login','admin\AdminController@do_login');
+// 后台注册
+Route::get('/admin/register','admin\AdminController@register');
+Route::post('/admin/do_register','admin\AdminController@do_register');
+Route::get('/User/index','admin\User@index');
+
+
+Route::get('return_url','PayController@return_url');// 同步
+Route::post('notify_url','PayController@notify_url');// 异步
+Route::get('pay', 'PayController@do_pay');
+
 
 // 前台
 Route::get('/home/index','home\indexController@index');
 Route::get('/home/product','home\indexController@product');
-Route::post('/home/do_product','home\indexController@do_product');
+Route::get('/home/do_product','home\indexController@do_product');
+Route::get('/home/cart','home\indexController@cart');
 
 
 // 周考

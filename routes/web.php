@@ -32,7 +32,7 @@ Route::get('/User/index','admin\User@index');
 
 Route::get('return_url','PayController@return_url');// 同步
 Route::post('notify_url','PayController@notify_url');// 异步
-Route::get('pay', 'PayController@do_pay');
+Route::get('pay', 'PayController@pay');
 
 
 // 前台
@@ -40,6 +40,14 @@ Route::get('/home/index','home\indexController@index');
 Route::get('/home/product','home\indexController@product');
 Route::get('/home/do_product','home\indexController@do_product');
 Route::get('/home/cart','home\indexController@cart');
+Route::get('/home/order','home\indexController@order');
+Route::get('/home/order_create','home\indexController@order_create');
+Route::get('/home/order_del','home\indexController@order_del');
+Route::post('/home/order_status','home\indexController@order_status');
+Route::get('/home/order_detail','home\indexController@order_detail');
+Route::get('/home/order_index','home\indexController@order_index');
+
+
 
 
 // 周考

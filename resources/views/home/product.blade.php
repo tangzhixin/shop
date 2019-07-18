@@ -51,8 +51,8 @@
                     </div>
                     <div class="row">
                         <div class="col 12">
-                            @if(!empty(Session::get('userName')))
-                                <a class="btn button-default" href="{{url('home/do_product')}}?id={{$data->id}}">SEND TO CART</a>
+                            @if(empty(Session::get('name')))
+                                你还没有登录
                             @else
                                 <a class="btn button-default" href="{{url('home/do_product')}}?id={{$data->id}}">发送到购物车</a>
                             @endif

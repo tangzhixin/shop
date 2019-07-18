@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Pay;
+use DB;
+
 class PayController extends Controller
 {
     public $app_id;
@@ -22,12 +25,16 @@ class PayController extends Controller
         $this->return_url = env('APP_URL').'/return_url';
     }
 
-    public function do_pay(){
-        $oid = time().mt_rand(1000,1111);  //订单编号
+    public function pay(Request $request){
+        $data=$request->all();
+
+//        $total=$request->input('total');
+//        $oid=$request->input('oid');
+        //$oid = time().mt_rand(1000,1111);  //订单编号
         //$this->ali_pay($oid);
         $order = [
-            'out_trade_no' => time(),
-            'total_amount' => '1',
+            'out_trade_no' => $data['oid'],
+            'total_amount' => $data['total'],
             'subject' => 'test subject - 测试',
         ];
         return Pay::alipay()->web($order);
@@ -39,7 +46,7 @@ class PayController extends Controller
         $post=json_decode($post_json,1);
         // 业务处理
     }
-    
+
     public function rsaSign($params) {
         return $this->sign($this->getSignContent($params));
     }
@@ -53,7 +60,7 @@ class PayController extends Controller
     		$priKey = file_get_contents($this->rsaPrivateKeyFilePath);
             $res = openssl_get_privatekey($priKey);
     	}
-        
+
         ($res) or die('您使用的私钥格式错误，请检查RSA私钥配置');
         openssl_sign($data, $sign, $res, OPENSSL_ALGO_SHA256);
         if(!$this->checkEmpty($this->rsaPrivateKeyFilePath)){
@@ -82,7 +89,7 @@ class PayController extends Controller
         return $stringToBeSigned;
     }
 
-    
+
 
     /**
      * 根据订单号支付
@@ -178,10 +185,17 @@ class PayController extends Controller
             file_put_contents(storage_path('logs/alipay.log'),$log_str,FILE_APPEND);
             //验证订单交易状态
             if($_POST['trade_status']=='TRADE_SUCCESS'){
-                
+                $oid = $_POST['out_trade_no'];     //商户订单号
+                $info = [
+                    'pay_time'      => strtotime($_POST['gmt_payment']), //支付时间
+                    'state'         => 2
+                ];
+                $order_result =DB::table('')->where(['oid'=>$oid])->update($info);
+                $arr=['state'=>2,'pay_time'=>time()];
+                $up=DB::table('order')->update('$arr');
             }
         }
-        
+
         echo 'success';
     }
     //验签
@@ -208,5 +222,14 @@ class PayController extends Controller
             openssl_free_key($res);
         }
         return $result;
+    }
+
+    public function return_url(Request $request){
+        $data=$request->all();
+//        dd($data);
+        $obj=DB::table('order')->get();
+//        $obj=get_object_vars($obj);
+//        dd($obj);
+        return view('pay/returnUrl',['obj'=>$obj]);
     }
 }

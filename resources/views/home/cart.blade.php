@@ -8,7 +8,7 @@
                 <h3>CART</h3>
             </div>
             <div class="content">
-                @foreach($cart as $v)
+                @foreach($data as $v)
                     <div class="cart-1">
                         <div class="row">
                             <div class="col s5">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn button-default" href="{{url('home/order_create')}}?total={{$total}}">去结账</a>
+            <a class="btn button-default" href="{{url('home/order_detail')}}?total={{$total}}">保存订单</a>
         </div>
     </div>
     <!-- end cart -->

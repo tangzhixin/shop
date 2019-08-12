@@ -82,7 +82,7 @@ class AdminController extends Controller
     public function index(Request $request){
 //         echo 111;die;
         $req=$request->all();
-        // var_dump($req);
+//         var_dump($req);
         $search="";
         if(!empty($req['search'])){
             $search=$req['search'];

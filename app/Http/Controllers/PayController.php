@@ -41,10 +41,16 @@ class PayController extends Controller
     }
 
     public function notify_url(){
-        $post_json=file_get_contents("php://input");
-        \Log::Info($post_json);
-        $post=json_decode($post_json,1);
+        //$post_json=file_get_contents("php://input");
+       // \Log::Info($post_json);
+        //$post_json = 'gmt_create=2019-07-19+08%3A40%3A04&charset=utf-8&gmt_payment=2019-07-19+08%3A40%3A14&notify_time=2019-07-19+08%3A40%3A15&subject=test+subject+-+%E6%B5%8B%E8%AF%95&sign=gmVy3Kmy3Go21pCUHgTKzAgavVBAnHtncmDk0ZSmUcjVit1CLrklkuZZzjO7F%2BjOwc9lm1rX%2Ba3OCSar5EEmP0vZC5M6k4Wn4ZNTFSnXVnweX%2FwDb5U9nYIqR54xDI2FWG23IEw7Jxr6nFGs0eMgLjCDBBanm5WCUNPt%2FY%2BdjO5rhdsVwCH%2B%2Ft2C4AgJDHhyoC3IWN9xCmqDpYJ128lE7HETiyS0o49spAais6FCmnH8YIVMbp0n6q4oaCCtrmmMDwvuMe0k8u6b7NZzfVxlF0TsdZj1ZhMt5mFhjBNOUOVqrxtfC1VDA1yLlf7Oc1gYs2RWXFNLnYfQ42JcAixhjw%3D%3D&buyer_id=2088102178909731&invoice_amount=11734.00&version=1.0&notify_id=2019071900222084015009731000390047&fund_bill_list=%5B%7B%22amount%22%3A%2211734.00%22%2C%22fundChannel%22%3A%22ALIPAYACCOUNT%22%7D%5D&notify_type=trade_status_sync&out_trade_no=15634967501107&total_amount=11734.00&trade_status=TRADE_SUCCESS&trade_no=2019071922001409731000049603&auth_app_id=2016101100657568&receipt_amount=11734.00&point_amount=0.00&app_id=2016101100657568&buyer_pay_amount=11734.00&sign_type=RSA2&seller_id=2088102179019798';
+//        dd($post_json);
+        //$post=json_decode($post_json,1);
+        //$post = explode('&',$post_json);
+       // dd($post);
         // 业务处理
+        $arr=['state'=>2,'pay_time'=>time()];
+        $up=DB::table('order')->update($arr);
     }
 
     public function rsaSign($params) {
@@ -185,14 +191,7 @@ class PayController extends Controller
             file_put_contents(storage_path('logs/alipay.log'),$log_str,FILE_APPEND);
             //验证订单交易状态
             if($_POST['trade_status']=='TRADE_SUCCESS'){
-                $oid = $_POST['out_trade_no'];     //商户订单号
-                $info = [
-                    'pay_time'      => strtotime($_POST['gmt_payment']), //支付时间
-                    'state'         => 2
-                ];
-                $order_result =DB::table('')->where(['oid'=>$oid])->update($info);
-                $arr=['state'=>2,'pay_time'=>time()];
-                $up=DB::table('order')->update('$arr');
+
             }
         }
 

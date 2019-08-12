@@ -44,6 +44,7 @@
 
             <div class="form-group">
                 <div class="col-lg-4 col-lg-offset-1">
+                    <h2><a href="{{url('wechat/login')}}">第三方登录</a></h2>
                     <input type="submit" value="登录" class="btn btn-danger btn-lg">
                     <span class="text"></span>
                 </div>

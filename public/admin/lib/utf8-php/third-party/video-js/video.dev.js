@@ -611,7 +611,7 @@ vjs.createEl = function(tagName, properties){
 
       // The check for dash checks for the aria-* attributes, like aria-label, aria-valuemin.
       // The additional check for "role" is because the default method for adding attributes does not
-      // add the attribute "role". My guess is because it's not a valid attribute in some namespaces, although
+      // add the attribute "role". My zuo is because it's not a valid attribute in some namespaces, although
       // browsers handle the attribute just fine. The W3C allows for aria-* attributes to be used in pre-HTML5 docs.
       // http://www.w3.org/TR/wai-aria-primer/#ariahtml. Using setAttribute gets around this problem.
 

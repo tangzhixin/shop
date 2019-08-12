@@ -1363,7 +1363,7 @@ var CodeMirror = (function() {
                 else {toX = estX; to = estimated; break;}
             }
             if (x > toX) return to;
-            // Try to guess a suitable lower bound as well.
+            // Try to zuo a suitable lower bound as well.
             estimated = Math.floor(to * 0.8); estX = getX(estimated);
             if (estX < x) {from = estimated; fromX = estX;}
             // Do a binary search between these bounds.
@@ -1433,7 +1433,7 @@ var CodeMirror = (function() {
                 else {toX = estX; to = estimated; break;}
             }
             if (x > toX) return {line: lineNo, ch: to};
-            // Try to guess a suitable lower bound as well.
+            // Try to zuo a suitable lower bound as well.
             estimated = Math.floor(to * 0.8); estX = getX(estimated);
             if (estX < x) {from = estimated; fromX = estX;}
             // Do a binary search between these bounds.

@@ -31,7 +31,7 @@ class CommController extends Controller
         if(empty($path)){
             echo "file";die;
         }else{
-            $path=$request->file('b_pic')->store('tang');
+            $path=$request->file('b_pic')->store('monthly');
         }
         $path=('/storage/'.$path);
 //        dd($obj);
@@ -69,7 +69,7 @@ class CommController extends Controller
         if(empty($files)){
             echo "false";
         }else{
-            $path=$request->file('b_pic')->store('tang');
+            $path=$request->file('b_pic')->store('monthly');
             $b_pic=('/storage/'.$path);
             $arr=['b_pic'=>$b_pic];
             $res=DB::table('commodity')->where($where)->update($arr);

@@ -168,7 +168,7 @@ class indexController extends Controller
     public function order(Request $request){
 //        echo 111;die;
         $data=DB::table('order')->get();
-//        dd($data);
+//        dd($data);0
         return view('home/order',['data'=>$data]);
     }
     // 删除订单

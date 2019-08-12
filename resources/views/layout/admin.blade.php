@@ -57,9 +57,40 @@
             <dd><a href="{{url('User/index')}}">用户列表</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
-        <li class="layui-nav-item"><a href="">发布商品</a></li>
-      </ul>
+          <li class="layui-nav-item">
+              <a href="javascript:;">经纬度管理</a>
+              <dl class="layui-nav-child">
+                  <dd><a href="{{url('LongitudeController')}}">经纬度添加</a></dd>
+                  <dd><a href="{{url('Longitude/index')}}">经纬度地址</a></dd>
+              </dl>
+          </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">周考</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{{url('Studen/add')}}">添加</a></dd>
+            <dd><a href="{{url('Studen/index')}}">列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">用户粉丝列表</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{{url('')}}">添加</a></dd>
+            <dd><a href="{{url('wechat/index')}}">列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">标签管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{{url('wechat/get_label')}}">添加</a></dd>
+            <dd><a href="{{url('wechat/get_label_list')}}">列表</a></dd>
+          </dl>
+        <li class="layui-nav-item">
+          <a href="javascript:;">素材管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="">添加</a></dd>
+            <dd><a href="{{url('wechat/upload_source')}}">列表</a></dd>
+          </dl>
+
     </div>
   </div>
   

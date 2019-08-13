@@ -159,6 +159,8 @@ Route::get('agent/user_list','agent\AgentController@user_list');
 Route::get('agent/creat_qrcode','agent\AgentController@creat_qrcode');
 Route::get('agent/agent_list','agent\AgentController@agent_list');
 Route::get('agent/tanghu','agent\AgentController@tanghu');
+Route::get('agent/add','agent\AgentController@add');
+Route::post('agent/do_add','agent\AgentController@do_add');
 /// /////////////////////////////////////////////////////////////////////////////////////////
 
 

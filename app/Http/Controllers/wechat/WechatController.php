@@ -494,6 +494,7 @@ class WechatController extends Controller
         $xml = (array)$xml; //转化成数组
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents(storage_path('logs/wx_event.log'),$log_str,FILE_APPEND);
+//        dd($xml);
         if($xml['MsgType']=='event'){
             if($xml['Event']=='subscribe'){
                 if(isset($xml['EventKey'])){
@@ -504,6 +505,7 @@ class WechatController extends Controller
                     }
                     $message = '你好,欢迎关注本帅哥的服务号!';
                     $xml_str='<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+                    echo $xml_str;
                 }
             }
         }elseif($xml['MsgType']=='text'){

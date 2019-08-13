@@ -1,19 +1,18 @@
 @extends('layout.admin')
 @section('title','用户列表页面')
 @section('body')
+    <h2 align="center"><a href="{{url('agent/add')}}">用户添加</a></h2>
     <table border="1" align="center">
         <tr>
             <th>用户uid</th>
-            <th>用户专属推广码</th>
+            <th>用户名</th>
             <th>用户专属二维码</th>
             <th>操作</th>
         </tr>
         @foreach($tang as $v)
         <tr>
             <td>{{$v->id}}</td>
-            <td>
-                
-            </td>
+            <td>{{$v->name}}</td>
             <td>
                 @if(($v->qrcode_url)=='')
                 尚未生成

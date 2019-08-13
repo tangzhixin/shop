@@ -79,6 +79,22 @@ class AgentController extends Controller
         return view('agent/agent_list',['obj'=>$obj]);
     }
 
+    // 用户添加
+    public function add()
+    {
+        return view('agent/add');
+    }
+    public function do_add(Request $request)
+    {
+        $data=$request->all();
+//        dd($data);
+        $obj=DB::connection('access')->table('user')->insert(['name'=>$data['name']]);
+//        dd($obj);
+        if($obj){
+            return redirect('agent/user_list');
+        }
+    }
+
 
 
 

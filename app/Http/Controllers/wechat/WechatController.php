@@ -483,9 +483,34 @@ class WechatController extends Controller
 //        dd($url_to);
         header("location:$url_to");
     }
-
+    // 微信消息推送
     public function tangtang()
     {
+//        $data=file_get_contents("php://input");
+//        dd($data);
+        $data = file_get_contents("php://input");
+        //解析XML
+        $xml = simplexml_load_string($data,'SimpleXMLElement', LIBXML_NOCDATA);        //将 xml字符串 转换成对象
+        $xml = (array)$xml; //转化成数组
+        $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
+        file_put_contents(storage_path('logs/wx_event.log'),$log_str,FILE_APPEND);
+        if($xml['MsgType']=='event'){
+            if($xml['Event']=='subscribe'){
+                if(isset($xml['EventKey'])){
+                    $agent_code=explode('_',$xml['EventKey'])[1];
+                    $dataa=DB::connection('access')->table('user_agent')->where(['openid'=>$xml['FromUserName']])->first();
+                    if(empty($dataa)){
+                        $datas=DB::connection('access')->table('user_agent')->insert(['uid'=>$agent_code,'openid'=>$xml['FromUserName'],'add_time'=>time()]);
+                    }
+                    $message = '你好,欢迎关注本帅哥的服务号!';
+                    $xml_str='<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+                }
+            }
+        }elseif($xml['MsgType']=='text'){
+            $message = '你好!';
+            $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+            echo $xml_str;
+        }
 
     }
 

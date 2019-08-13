@@ -153,8 +153,13 @@ Route::post('/wechat/do_get_update','wechat\WechatController@do_get_update');
 Route::get('wechat/push_tang','wechat\WechatController@push_tang');
 Route::post('wechat/do_push_tang','wechat\WechatController@do_push_tang');
 Route::get('wechat/ticket','wechat\WechatController@ticket');
-
+Route::post('wechat/tangtang','wechat\WechatController@tangtang');
 ///////////////////////////////////////////////////////////////////////////////////////
+Route::get('agent/user_list','agent\AgentController@user_list');
+Route::get('agent/creat_qrcode','agent\AgentController@creat_qrcode');
+Route::get('agent/agent_list','agent\AgentController@agent_list');
+Route::get('agent/tanghu','agent\AgentController@tanghu');
+/// /////////////////////////////////////////////////////////////////////////////////////////
 
 
 

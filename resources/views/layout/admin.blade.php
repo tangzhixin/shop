@@ -90,6 +90,12 @@
             <dd><a href="">添加</a></dd>
             <dd><a href="{{url('wechat/upload_source')}}">列表</a></dd>
           </dl>
+        <li class="layui-nav-item">
+          <a href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="">添加</a></dd>
+            <dd><a href="{{url('agent/user_list')}}">列表</a></dd>
+          </dl>
 
     </div>
   </div>

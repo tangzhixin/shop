@@ -161,6 +161,7 @@ Route::get('agent/agent_list','agent\AgentController@agent_list');
 Route::get('agent/tanghu','agent\AgentController@tanghu');
 Route::get('agent/add','agent\AgentController@add');
 Route::post('agent/do_add','agent\AgentController@do_add');
+Route::get('agent/profile','agent\AgentController@profile');
 /// /////////////////////////////////////////////////////////////////////////////////////////
 
 

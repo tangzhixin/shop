@@ -499,9 +499,14 @@ class WechatController extends Controller
             if($xml['Event']=='subscribe'){
                 if(isset($xml['EventKey'])){
                     $agent_code=explode('_',$xml['EventKey'])[1];
-                    $dataa=DB::connection('access')->table('user_agent')->where(['openid'=>$xml['FromUserName']])->first();
-                    if(empty($dataa)){
-                        $datas=DB::connection('access')->table('user_agent')->insert(['uid'=>$agent_code,'openid'=>$xml['FromUserName'],'add_time'=>time()]);
+                    $obj=DB::connection('access')->table('user_agent')->where(['openid'=>$xml['FromUserName']])->first();
+                    dd($obj);
+                    if(empty($obj)){
+                        $datas=DB::connection('access')->table('user_agent')->insert(
+                            [
+                                'uid'=>$agent_code,'openid'=>$xml['FromUserName'],'add_time'=>time()
+                            ]);
+//                        dd($datas);
                     }
                     $message = '你好,欢迎关注本帅哥的服务号!';
                     $xml_str='<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';

@@ -21,7 +21,11 @@
                 @endif
             </td>
             <td>
+                @if(($v->qrcode_url)!='')
+                已生成
+                @else
                 <a href="{{url('agent/creat_qrcode')}}?id={{$v->id}}">生成用户专属二维码</a> |
+                @endif
                 <a href="{{url('agent/agent_list')}}?id={{$v->id}}">用户推广用户列表</a> |
                 @if(($v->agent_code)=='')
                 还未生成

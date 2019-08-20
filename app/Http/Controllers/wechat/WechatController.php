@@ -71,8 +71,10 @@ class WechatController extends Controller
     {
 //        echo 111;
         $req=$request->all();
+//        dd($req);
         $code=$req['code'];
 //        dd($code);
+        // 获取access_token
         // 获取access_token
         $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_APPSECRET').'&code='.$code.'&grant_type=authorization_code';
         $re=file_get_contents($url);
@@ -486,6 +488,8 @@ class WechatController extends Controller
     // 微信消息推送
     public function tangtang()
     {
+//        echo $_GET['echostr'];
+//        die();
 //        $data=file_get_contents("php://input");
 //        dd($data);
         $data = file_get_contents("php://input");

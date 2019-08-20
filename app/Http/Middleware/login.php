@@ -15,11 +15,14 @@ class login
      */
     public function handle($request, Closure $next)
     {
-        $loginInfo=session('loginInfo');
-        if(!empty($loginInfo)){
-            return $next($request);
+        $loginInfo=session()->has('loginInfo');
+        if(empty($loginInfo)){
+//            echo "登录成功";
         }else{
-            return redirect('login');
+            return redirect('admin/login');
         }
+        $response=$next($request);
+
+        return $response;
     }
 }

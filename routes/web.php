@@ -155,6 +155,7 @@ Route::post('wechat/do_push_tang','wechat\WechatController@do_push_tang');
 Route::get('wechat/ticket','wechat\WechatController@ticket');
 Route::post('wechat/tangtang','wechat\WechatController@tangtang');
 ///////////////////////////////////////////////////////////////////////////////////////
+/// 菜单作业
 Route::get('agent/user_list','agent\AgentController@user_list');
 Route::get('agent/creat_qrcode','agent\AgentController@creat_qrcode');
 Route::get('agent/agent_list','agent\AgentController@agent_list');
@@ -162,7 +163,18 @@ Route::get('agent/tanghu','agent\AgentController@tanghu');
 Route::get('agent/add','agent\AgentController@add');
 Route::post('agent/do_add','agent\AgentController@do_add');
 Route::get('agent/profile','agent\AgentController@profile');
+Route::get('agent/input','agent\AgentController@input');
+Route::post('agent/do_input','agent\AgentController@do_input');
+Route::get('agent/index','agent\AgentController@index');
+Route::get('agent/index_1','agent\AgentController@index_1');
+Route::get('agent/delete','agent\AgentController@delete');
 /// /////////////////////////////////////////////////////////////////////////////////////////
+// 表白作业
+Route::get('clearing/list','clearing\ClearingController@list');
+Route::get('clearing/index','clearing\ClearingController@index');
+Route::get('clearing/add','clearing\ClearingController@add');
+Route::post('clearing/do_add','clearing\ClearingController@do_add');
+/// /////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -173,6 +185,11 @@ Route::get('monthly/login','monthly\Monthly@login');
 Route::post('monthly/do_login','monthly\Monthly@do_login');
 Route::post('monthly/add','monthly\Monthly@add');
 Route::get('monthly/del','monthly\Monthly@del');
+
+
+//8月周考题
+Route::get('zhou/login','zhou\zhouController@login');
+Route::get('zhou/code','zhou\zhouController@code');
 
 
 
@@ -201,6 +218,11 @@ Route::post('/student/updateadd','StudentController@updateadd');
 Route::group(['middleware'=>['login']],function(){
     // 添加学生信息
 Route::get('/student/add','StudentController@add');
+
+    Route::get('zhou/add','zhou\zhouController@add');
+    Route::post('zhou/do_add','zhou\zhouController@do_add');
+    Route::get('zhou/list','zhou\zhouController@list');
+    Route::get('zhou/index','zhou\zhouController@index');
 });
 
 // 修改中间件

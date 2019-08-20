@@ -57,13 +57,7 @@
             <dd><a href="{{url('User/index')}}">用户列表</a></dd>
           </dl>
         </li>
-          <li class="layui-nav-item">
-              <a href="javascript:;">经纬度管理</a>
-              <dl class="layui-nav-child">
-                  <dd><a href="{{url('LongitudeController')}}">经纬度添加</a></dd>
-                  <dd><a href="{{url('Longitude/index')}}">经纬度地址</a></dd>
-              </dl>
-          </li>
+
         <li class="layui-nav-item">
           <a href="javascript:;">周考</a>
           <dl class="layui-nav-child">
@@ -84,19 +78,37 @@
             <dd><a href="{{url('wechat/get_label')}}">添加</a></dd>
             <dd><a href="{{url('wechat/get_label_list')}}">列表</a></dd>
           </dl>
+        </li>
         <li class="layui-nav-item">
           <a href="javascript:;">素材管理</a>
           <dl class="layui-nav-child">
             <dd><a href="">添加</a></dd>
             <dd><a href="{{url('wechat/upload_source')}}">列表</a></dd>
           </dl>
+        </li>
         <li class="layui-nav-item">
           <a href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="">添加</a></dd>
             <dd><a href="{{url('agent/user_list')}}">列表</a></dd>
           </dl>
-
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">自定义菜单管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{{url('agent/input')}}">自定义菜单添加</a></dd>
+            <dd><a href="{{url('agent/index')}}">自定义菜单列表</a></dd>
+              <dd><a href="{{url('agent/index_1')}}">线上自定义菜单列表</a></dd>
+          </dl>
+        </li>
+          <li class="layui-nav-item">
+              <a href="javascript:;">表白管理</a>
+              <dl class="layui-nav-child">
+                  <dd><a href="{{url('clearing/index')}}">表白</a></dd>
+                  <dd><a href="{{url('clearing/add')}}">表白添加</a></dd>
+                  <dd><a href="{{url('clearing/list')}}">表白列表</a></dd>
+              </dl>
+          </li>
     </div>
   </div>
   

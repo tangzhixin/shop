@@ -36,7 +36,7 @@ Route::post('/Studen/do_add','zhokao\Studen@do_add');
 
 
 Route::get('return_url','PayController@return_url');// 同步
-Route::post('notify_url','PayController@notify_url');// 异步
+//Route::post('notify_url','PayController@notify_url');// 异步
 Route::get('pay', 'PayController@pay');
 
 
@@ -174,6 +174,7 @@ Route::get('clearing/list','clearing\ClearingController@list');
 Route::get('clearing/index','clearing\ClearingController@index');
 Route::get('clearing/add','clearing\ClearingController@add');
 Route::post('clearing/do_add','clearing\ClearingController@do_add');
+Route::get('clearing/tang','clearing\ClearingController@tang');
 /// /////////////////////////////////////////////////////////////////////////////////////
 
 

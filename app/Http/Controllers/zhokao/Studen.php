@@ -31,12 +31,14 @@ class Studen extends Controller
         }else{
             $list=json_decode($redis->get('info'),1);
         }
+//        dd($num);
 
         if(!empty($req['place']) || !empty($req['arrival'])){
             $info=DB::table('Studen')->where('place','like','%'.$req['place'].'%')->where('arrival','like','%'.$req['arrival'].'%')->paginate(2);
         }else{
             $info=DB::table('Studen')->paginate(2);
         }
+//        dd($req);
 
         return view('zhokao/index',['data'=>$info,'place'=>$req['place'],'arrival'=>$req['arrival']]);
     }

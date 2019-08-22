@@ -93,7 +93,7 @@ class zhouController extends Controller
         $request_uri=env('APP_URL').'/zhou/code';
 //        dd($request_uri);
         $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WECHAT_APPID').'&redirect_uri='.urlencode($request_uri).'&response_type=code&scope=snsapi_base&state=state#wechat_redirect';
-//        dd($url);
+        dd($url);
         header('Location:'.$url);
 //        dd(file_get_contents($url));
     }

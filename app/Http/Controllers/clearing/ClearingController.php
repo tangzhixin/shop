@@ -25,7 +25,9 @@ class ClearingController extends Controller
     }
     public function list()
     {
-
+        $data=DB::connection('access')->table('clearing')->groupBy('mingcheng')->select(['mingcheng'])->orderBy('mingcheng')->get()->toArray();
+        dd($data);
+        return view('clearing/list',['obj'=>$data]);
     }
     public function add()
     {
@@ -34,7 +36,22 @@ class ClearingController extends Controller
     public function do_add(Request $request)
     {
         $data=$request->all();
-        dd($data);
+//        dd($data);
+        $obj=DB::connection('access')->table('clearing')->insert([
+            'jibie'=>$data['jibie'],
+            'mingcheng'=>$data['mingcheng'],
+            'erming'=>$data['erming'],
+            'url'=>$data['url'],
+            'leixing'=>$data['leixing']
+        ]);
+        if($obj){
+            return redirect('clearing/list');
+        }
+    }
+    // 推送
+    public function tang()
+    {
+
     }
 
 }

@@ -170,11 +170,9 @@ Route::get('agent/index_1','agent\AgentController@index_1');
 Route::get('agent/delete','agent\AgentController@delete');
 /// /////////////////////////////////////////////////////////////////////////////////////////
 // 表白作业
-Route::get('clearing/list','clearing\ClearingController@list');
-Route::get('clearing/index','clearing\ClearingController@index');
-Route::get('clearing/add','clearing\ClearingController@add');
-Route::post('clearing/do_add','clearing\ClearingController@do_add');
-Route::get('clearing/tang','clearing\ClearingController@tang');
+Route::get('clearing/login','clearing\ClearingController@login');
+Route::get('clearing/code','clearing\ClearingController@code');
+
 /// /////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -191,6 +189,12 @@ Route::get('monthly/del','monthly\Monthly@del');
 //8月周考题
 Route::get('zhou/login','zhou\zhouController@login');
 Route::get('zhou/code','zhou\zhouController@code');
+
+
+// A卷
+Route::get('price/index','price\PriceController@index');
+Route::get('price/list','price\PriceController@list');
+
 
 
 
@@ -224,6 +228,13 @@ Route::get('/student/add','StudentController@add');
     Route::post('zhou/do_add','zhou\zhouController@do_add');
     Route::get('zhou/list','zhou\zhouController@list');
     Route::get('zhou/index','zhou\zhouController@index');
+
+
+    Route::get('clearing/list','clearing\ClearingController@list');
+    Route::get('clearing/index','clearing\ClearingController@index');
+    Route::get('clearing/add/{openid}','clearing\ClearingController@add');
+    Route::post('clearing/do_add','clearing\ClearingController@do_add');
+    Route::get('clearing/tang/{mingcheng}','clearing\ClearingController@tang');
 });
 
 // 修改中间件

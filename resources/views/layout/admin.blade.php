@@ -66,6 +66,13 @@
           </dl>
         </li>
         <li class="layui-nav-item">
+          <a href="javascript:;">周考2</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{{url('zhou/add')}}">添加</a></dd>
+            <dd><a href="{{url('zhou/list')}}">列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
           <a href="javascript:;">用户粉丝列表</a>
           <dl class="layui-nav-child">
             <dd><a href="{{url('')}}">添加</a></dd>

@@ -504,23 +504,98 @@ class WechatController extends Controller
                 if(isset($xml['EventKey'])){
                     $agent_code=explode('_',$xml['EventKey'])[1];
                     $obj=DB::connection('access')->table('user_agent')->where(['openid'=>$xml['FromUserName']])->first();
-                    dd($obj);
+//                    dd($obj);
                     if(empty($obj)){
                         $datas=DB::connection('access')->table('user_agent')->insert(
                             [
                                 'uid'=>$agent_code,'openid'=>$xml['FromUserName'],'add_time'=>time()
                             ]);
 //                        dd($datas);
+                    }elseif($xml['Event'] == 'location_select'){
+                        $message = $xml['SendLocationInfo']->Label;
+                        \Log::Info($message);
+                        $xml_str = '<xml><ToUserName><![CDATA[otAUQ1UtX-nKATwQMq5euKLME2fg]]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+                        echo $xml_str;
+                    }elseif($xml['Event'] == 'CLICK'){
+                        if($xml['EventKey'] == 'my_biaobai'){
+                            $biaobai_info = DB::connection('mysql_cart')->table('biaobai')->where(['from_user'=>$xml['FromUserName']])->get()->toArray();
+                            $message = '';
+                            foreach($biaobai_info as $v){
+                                $message .= $v->content."\n";
+                            }
+                            $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+                            echo $xml_str;
+                        }
                     }
-                    $message = '你好,欢迎关注本帅哥的服务号!';
-                    $xml_str='<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+
+                    $message = '欢迎使用本公司提供的油价查询功能';
+                    $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
                     echo $xml_str;
+                }else{
+                    //已关注
+                    $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你已关注本公众号,你好]]></Content></xml>';
+                    //响应回去
+                    echo $xml_str;die;
                 }
             }
         }elseif($xml['MsgType']=='text'){
-            $message = '你好!';
-            $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+            $info="你好";
+            if($xml['Content']=='你好') {
+                $info = "你也好";
+            }
+//            dd($info);
+            $oil_str=substr($xml['Content'],-6);
+//            dd($oil_str);
+            if($oil_str=='油价'){
+                $key="37b86d4a0e2673500d34227abc08fa53";
+                $oil_url="http://apis.juhe.cn/cnoil/oil_city?key=$key";
+                $oil_re=file_get_contents($oil_url);
+                $oil_re=json_decode($oil_re,1);
+//                dd($oil_re);
+                $oil_info=$oil_re['result'];
+//                dd($oil_info);
+                $oil_name=substr($xml['Content'],0,-6);
+//                dd($oil_name);
+                $city=array_column($oil_info,'city');
+//                dd($city);
+                $array=[];
+                foreach($oil_info as $v){
+                    if($oil_name==$v['city']){
+//                            echo "<pre>";
+//                            print_r($v);
+                        $array=$v;
+                    }
+                }
+//                dd($array);
+//                die;
+                $h1=$array['92h'];
+                $h2=$array['95h'];
+                $h3=$array['98h'];
+                $oh=$array['0h'];
+//                dd($oh);
+                $gg=$array['city'];
+                $message='92h:'.$h1.',95h:'.$h2.',98h:'.$h3.',Oh:'.$oh.'城市:'.$gg;
+//                dd($message);
+
+                $redis=new \Redis();
+                $redis->connect('127.0.0.1','6379');
+                $num=$redis->incr($gg);
+//                dd($num);
+                if($num>10){
+                    $redis->set($gg,json_encode($message));
+
+                }
+                $redis_info=$redis->get($gg);
+                if(($redis_info)===true){
+                    $message=$redis_info;
+                }
+                $info=$message;
+            }
+
+            $xml_str = '<xml><ToUserName><![CDATA['.$xml['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$info.']]></Content></xml>';
+            //响应回去
             echo $xml_str;
+
         }
 
     }

@@ -58,8 +58,9 @@ class AgentController extends Controller
         $file_name=time().rand(1000,9999).'.'.$ext;
         $path='qrcode/'.$file_name;
         $ree=Storage::disk('local')->put($path,$response->getBody());
+//        dd($ree);
         $qrcode_url=env('APP_URL').'/storage/'.$path;
-
+//        dd($qrcode_url);
         $res=DB::connection('access')->table('user')->where('id','=',$uid)->update(
             [
                 'agent_code'=>$obj['ticket'],

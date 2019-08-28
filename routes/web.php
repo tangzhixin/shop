@@ -195,6 +195,9 @@ Route::get('zhou/code','zhou\zhouController@code');
 Route::get('price/index','price\PriceController@index');
 Route::get('price/list','price\PriceController@list');
 
+//8月 月考
+Route::get('yuekao/index','yuekao\YuekaoController@index');
+
 
 
 
